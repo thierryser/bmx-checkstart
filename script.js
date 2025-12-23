@@ -203,6 +203,11 @@ armBtn.addEventListener('click', () => {
 
 resetBtn.addEventListener('click', resetSystem);
 
+// Close results on click
+resultPanel.addEventListener('click', () => {
+    resultPanel.classList.add('hidden');
+});
+
 function armSystem() {
     if (!targets.gate.set || !targets.pilot.set) return;
 
