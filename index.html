@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMX Reaction Check</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <header>
+            <h1>BMX <span class="accent">REACTION</span> CHECK</h1>
+            <p class="subtitle">Grille & Caméra</p>
+        </header>
+
+        <main>
+            <div class="monitor-grid">
+                <!-- Audio Monitor -->
+                <div class="monitor-card audio-card">
+                    <h2>🎤 Audio</h2>
+                    <div class="visualizer-container">
+                        <div id="audio-bar" class="level-bar"></div>
+                    </div>
+                    <div class="status-indicator" id="audio-status">En attente</div>
+                </div>
+
+                <!-- Video Monitor -->
+                <div class="monitor-card video-card">
+                    <h2>📷 Mouvement</h2>
+                    <div class="video-wrapper">
+                        <video id="webcam" autoplay playsinline muted></video>
+                        <canvas id="motion-canvas"></canvas>
+                    </div>
+                    <div class="visualizer-container">
+                        <div id="motion-bar" class="level-bar"></div>
+                    </div>
+                    <div class="status-indicator" id="video-status">Calme</div>
+                </div>
+            </div>
+
+            <div class="results-display hidden" id="result-panel">
+                <div class="result-value" id="reaction-time">000 <span class="ms">ms</span></div>
+                <div class="result-label">Temps de Réaction</div>
+            </div>
+
+            <div class="controls">
+                <button id="arm-btn" class="btn primary">ARMER LE SYSTÈME</button>
+                <button id="reset-btn" class="btn secondary hidden">RÉINITIALISER</button>
+            </div>
+
+            <p id="instruction" class="instruction">Autorisez l'accès Micro & Caméra pour commencer</p>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
