@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>BMX Reaction Check</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,46 +16,68 @@
 <body>
     <div class="app-container">
         <header>
-            <h1>BMX <span class="accent">REACTION</span> CHECK</h1>
-            <p class="subtitle">Grille & Caméra</p>
+            <h1>BMX <span class="accent">REACTION</span></h1>
+            <p class="subtitle">Grille & Pilote</p>
         </header>
 
         <main>
-            <div class="monitor-grid">
-                <!-- Audio Monitor -->
-                <div class="monitor-card audio-card">
-                    <h2>🎤 Audio</h2>
-                    <div class="visualizer-container">
-                        <div id="audio-bar" class="level-bar"></div>
-                    </div>
-                    <div class="status-indicator" id="audio-status">En attente</div>
-                </div>
+            <!-- Setup & Monitor Area -->
+            <div class="video-container" id="video-container">
+                <video id="webcam" autoplay playsinline muted></video>
+                <canvas id="motion-canvas"></canvas>
 
-                <!-- Video Monitor -->
-                <div class="monitor-card video-card">
-                    <h2>📷 Mouvement</h2>
-                    <div class="video-wrapper">
-                        <video id="webcam" autoplay playsinline muted></video>
-                        <canvas id="motion-canvas"></canvas>
+                <!-- Target Markers (Hidden by default) -->
+                <div id="target-gate" class="target target-gate hidden">
+                    <div class="reticle"></div>
+                    <div class="label">GRILLE</div>
+                </div>
+                <div id="target-pilot" class="target target-pilot hidden">
+                    <div class="reticle"></div>
+                    <div class="label">PILOTE</div>
+                </div>
+            </div>
+
+            <div class="status-bar">
+                <div class="monitor-mini">
+                    <span class="label-mini" style="width:50px">GRILLE</span>
+                    <div class="visualizer-container-mini">
+                        <div id="bar-gate" class="level-bar-mini" style="background:var(--secondary-accent)"></div>
                     </div>
-                    <div class="visualizer-container">
-                        <div id="motion-bar" class="level-bar"></div>
+                </div>
+                <div class="status-text" id="main-status">PRÊT</div>
+                <div class="monitor-mini">
+                    <span class="label-mini">PILOTE</span>
+                    <div class="visualizer-container-mini">
+                        <div id="bar-pilot" class="level-bar-mini" style="background:var(--danger-color)"></div>
                     </div>
-                    <div class="status-indicator" id="video-status">Calme</div>
                 </div>
             </div>
 
             <div class="results-display hidden" id="result-panel">
                 <div class="result-value" id="reaction-time">000 <span class="ms">ms</span></div>
                 <div class="result-label">Temps de Réaction</div>
+                <p id="result-detail" class="detail-text"></p>
             </div>
 
             <div class="controls">
-                <button id="arm-btn" class="btn primary">ARMER LE SYSTÈME</button>
-                <button id="reset-btn" class="btn secondary hidden">RÉINITIALISER</button>
+                <button id="setup-btn" class="btn secondary">CHANGER CIBLES</button>
+                <button id="arm-btn" class="btn primary">ARMER</button>
+                <button id="reset-btn" class="btn secondary hidden">RECOMMENCER</button>
             </div>
 
-            <p id="instruction" class="instruction">Autorisez l'accès Micro & Caméra pour commencer</p>
+            <div class="history-container hidden" id="history-panel-ui">
+                <div class="history-header">
+                    <h3>DERNIERS TEMPS (10)</h3>
+                    <button id="clear-history-btn" class="btn secondary"
+                        style="padding: 0.4rem 0.8rem; font-size: 0.7rem;">EFFACER</button>
+                </div>
+                <ul id="history-list">
+                    <!-- Items will appear here -->
+                </ul>
+            </div>
+
+            <p id="instruction" class="instruction">Touchez l'écran : D'abord la GRILLE (Bleu), puis le PILOTE (Rouge).
+            </p>
         </main>
     </div>
 
